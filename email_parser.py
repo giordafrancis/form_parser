@@ -26,7 +26,7 @@
 import extract_msg # for msg parsing
 import re
 from pathlib import Path
-from typing import NamedTuple, TypeVar
+from typing import NamedTuple
 from collections import namedtuple
 
 
@@ -44,7 +44,7 @@ class EmailData(NamedTuple):
 # Create one regex per feature
 # TODO improve regex
 
-def _ref_num(email: str, subject: str) -> TypeVar:
+def _ref_num(email: str, subject: str) -> str:
     """
     Returns ref numer if found else settles for email suject
     """
@@ -55,7 +55,7 @@ def _ref_num(email: str, subject: str) -> TypeVar:
     else:
         return subject
 
-def _phone(email: str) -> TypeVar:
+def _phone(email: str) -> str:
     patt = re.search(r"Telephone:(?P<phone>.*)\n", email)
 
     if patt:
@@ -63,7 +63,7 @@ def _phone(email: str) -> TypeVar:
     else:
         return "n/a"
       
-def _first_name(email: str) -> TypeVar:
+def _first_name(email: str) -> str:
     patt = re.search(r"First name:(?P<f_name>.*)\n", email)
 
     if patt:
@@ -71,7 +71,7 @@ def _first_name(email: str) -> TypeVar:
     else:
         return "n/a"
 
-def _last_name(email: str) -> TypeVar:
+def _last_name(email: str) -> str:
     patt = re.search(r"Last name:(?P<l_name>.*)\n", email)
 
     if patt:
@@ -79,7 +79,7 @@ def _last_name(email: str) -> TypeVar:
     else:
         return "n/a"
 
-def _address(email: str) -> TypeVar:
+def _address(email: str) -> str:
     patt = re.search(r"Address:(?P<address>.*)\n", email)
 
     if patt:
@@ -87,7 +87,7 @@ def _address(email: str) -> TypeVar:
     else:
         return "n/a"
 
-def _email(email: str) -> TypeVar:
+def _email(email: str) -> str:
     patt = re.search(r"Email:(?P<email>.*)\n", email)
 
     if patt:
